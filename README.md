@@ -2,19 +2,24 @@
 
 This is a simple library for Rust to access data published via Delta Sharing
 
+## Features
+
+- Retrieve Delta Sharing information (shares, schemas, tables and files)
+- Query shared table data using [Polars](https://pola-rs.github.io/polars/polars/index.html). `get_dataframe` downloads the table's parquet files (and caches then locally for subsequent queries) and returns a lazy abstraction (logical plan) over an eager DataFrame. This lazy abstraction provides methods for incrementally modifying that logical plan until output is requested (via `collect`).
+
 ## Pre-requisites
 
 - [Delta Sharing](https://databricks.com/product/delta-sharing) set up with at least one shared table 
-- Rust installed, e.g. as described [here](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+- Rust is installed, e.g. as described [here](https://doc.rust-lang.org/cargo/getting-started/installation.html)
 
 ## Sample use
 
-1. Create a Rust binary package, e.g. `cargo new delta_sharing_test --bin`
+1. Create a new Rust binary package, e.g. `cargo new delta_sharing_test --bin`
 
 2. Add the following dependencies to `Cargo.toml`
 
 ```
-delta_sharing = { git = "https://github.com/r3stl355/delta-sharing-rust-client" }
+delta-sharing = { git = "https://github.com/r3stl355/delta-sharing-rust-client" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 env_logger = "0.9"
@@ -57,4 +62,9 @@ fn main() {
 
 ```
 
-5. Run, e.g. `cargo run --bin main` (alternatively, you can use `RUST_LOG=debug cargo run --bin main` if you want to see some extra debugging information)
+5. Run, e.g. `cargo run main` (alternatively, you can use `RUST_LOG=debug cargo run main` if you want to see some extra debugging information)
+
+## TODO
+
+- move to `async` mode (e.g. swap blocking `reqwest` Client to async version)
+- write more tests
