@@ -7,9 +7,20 @@ edition = "2021"
 [lib]
 path = "src/lib.rs"
 
+[features]
+blocking = ["reqwest/blocking"]
+
+[[example]]
+name = "async"
+
+[[example]]
+name = "blocking"
+required-features = ["blocking"]
+
 [dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread",] }
 parquet = "14.0.0"
-reqwest = { version = "0.11", features = ["blocking", "json"] }
+reqwest = { version = "0.11", features = ["json"] }
 url = "2.2"
 rustc_version_runtime = "0.1"
 serde = { version = "1.0", features = ["derive"] }
@@ -21,5 +32,5 @@ polars = { version = "0.22.8", features = ["lazy", "parquet"] }
 
 [dev-dependencies]
 wiremock = "0.5"
-futures = "0.3"
 uuid = { version = "1.1", features = ["v4"] }
+tokio-test = { version = "0.4" }

@@ -1,0 +1,5 @@
+{
+	"shareCredentialsVersion":1,
+	"bearerToken":"<your Delta Share access token>",
+	"endpoint":"<your Delta Share endpoinit URL>"
+}

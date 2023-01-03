@@ -23,7 +23,7 @@ pub async fn spawn_test_app() -> TestApp {
         endpoint: server.uri(),
         bearer_token: token,
     };
-    let app = Application::new(config, None).unwrap();
+    let app = Application::new(config, None).await.unwrap();
     let test_app = TestApp {
         app,
         server,
