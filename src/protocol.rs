@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
-use serde_json::Map;
 use serde_json::value::Value;
+use serde_json::Map;
 
 #[derive(Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
@@ -89,10 +89,3 @@ pub struct TableFiles {
     pub metadata: TableMetadata,
     pub files: Vec<File>,
 }
-
-// pub struct CdfOptions {
-//     pub starting_version: Option<i32>,
-//     pub ending_version: Option<i32>,
-//     pub starting_timestamp: Option<String>,
-//     pub ending_timestamp: Option<String>,
-// }

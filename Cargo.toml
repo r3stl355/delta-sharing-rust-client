@@ -1,7 +1,12 @@
 [package]
 name = "delta-sharing"
 version = "0.1.0"
-authors = ["Nikolay Ulmasov ulmasov@hotmail.com"]
+description = "Delta Sharing client library"
+keywords = ["delta", "delta-sharing"]
+repository = "https://github.com/r3stl355/delta-sharing-rust-client"
+authors = ["Nikolay Ulmasov <ulmasov@hotmail.com>"]
+readme = "README.md"
+license = "Apache-2.0"
 edition = "2021"
 
 [lib]
@@ -9,13 +14,6 @@ path = "src/lib.rs"
 
 [features]
 blocking = ["reqwest/blocking"]
-
-[[example]]
-name = "async"
-
-[[example]]
-name = "blocking"
-required-features = ["blocking"]
 
 [dependencies]
 tokio = { version = "1", features = ["macros", "rt-multi-thread",] }
@@ -34,3 +32,17 @@ polars = { version = "0.22.8", features = ["lazy", "parquet"] }
 wiremock = "0.5"
 uuid = { version = "1.1", features = ["v4"] }
 tokio-test = { version = "0.4" }
+
+[[example]]
+name = "async"
+path = "examples/async.rs"
+
+[[example]]
+name = "blocking"
+path = "examples/blocking.rs"
+required-features = ["blocking"]
+
+[[test]]
+name = "blocking"
+path = "tests/blocking.rs"
+required-features = ["blocking"]

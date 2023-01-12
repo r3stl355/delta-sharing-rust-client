@@ -18,6 +18,8 @@ This is a simple library for Rust to access data published via Delta Sharing. Ha
 - Set the `bearerToken` and `endpoint` values in the `config.json` to match your Delta Sharing information
 - Run a simple example included with the library: `cargo run --example async`. This example is using an async version of the library. When executed, it will get and display all the data from the first Data Sharing table it finds. For an example using a blocking version of the client, run `cargo run --example blocking --features="delta-sharing/blocking"`
 
-## TODO
+## Development
 
-Need to add more tests
+- Run async tests: `cargo test` (or `RUST_LOG=debug cargo test` for troubleshooting)
+- Run blocking tests: `cargo test --features blocking`
+- Style checking: `cargo fmt -- --check`

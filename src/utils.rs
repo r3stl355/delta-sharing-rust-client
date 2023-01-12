@@ -1,8 +1,8 @@
 pub const VERSION: &str = "1";
 pub const CREDENTIALS_VERSION: i32 = 1;
 
-use serde::{Deserialize, Serialize};
 use crate::protocol::*;
+use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
 #[derive(Deserialize, Debug)]
@@ -16,7 +16,7 @@ pub struct SchemaResponse {
 }
 
 #[derive(Deserialize, Debug)]
-pub struct TableResponse{
+pub struct TableResponse {
     pub items: Vec<Table>,
 }
 
