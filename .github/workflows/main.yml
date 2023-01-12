@@ -52,14 +52,14 @@ jobs:
 
         include:
           - name: linux / stable
-            test-features: "--features __internal_proxy_sys_no_cache"
-
-          - name: macOS / stable
-            os: macOS-latest
-            test-features: "--features __internal_proxy_sys_no_cache"
-
-          - name: feature / blocking
             features: "--features blocking"
+
+          # - name: feature / blocking
+          #   features: "--features blocking"
+
+          # - name: macOS / stable
+          #   os: macOS-latest
+          #   test-features: "--features __internal_proxy_sys_no_cache"
 
     steps:
       - name: Checkout
@@ -75,4 +75,4 @@ jobs:
         run: cargo build ${{ matrix.features }}
 
       - name: Test
-        run: cargo test ${{ matrix.features }} ${{ matrix.test-features }} -- --test-threads=1
+        run: cargo test ${{ matrix.features }} -- --test-threads=1

@@ -4,7 +4,7 @@ use common::create_mocked_test_app;
 use delta_sharing::protocol::*;
 use wiremock::matchers::method;
 
-#[cfg(not(feature = "blocking"))]
+// #[cfg(not(feature = "blocking"))]
 #[tokio::test]
 async fn list_shares() {
     let body =
@@ -21,7 +21,7 @@ async fn list_shares() {
     );
 }
 
-#[cfg(not(feature = "blocking"))]
+// #[cfg(not(feature = "blocking"))]
 #[tokio::test]
 async fn list_schemas() {
     let share_name = "share_1";

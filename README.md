@@ -1,3 +1,6 @@
+![experimental](https://github.com/GIScience/badges/raw/master/status/experimental.svg)
+[![main](https://github.com/r3stl355/delta-sharing-rust-client/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/r3stl355/delta-sharing-rust-client/actions/workflows/main.yml)
+
 # Delta Sharing client library for Rust
 
 This is a simple library for Rust to access data published via Delta Sharing. Has an async (`delta-sharing::application::Application`) version, and also a blocking (`delta-sharing::blocking::Application`) version for smaller operations, both exposing similar APIs.
