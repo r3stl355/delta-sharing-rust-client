@@ -1,4 +1,4 @@
-![experimental](https://github.com/GIScience/badges/raw/master/status/experimental.svg)
+[![experimental](https://github.com/GIScience/badges/raw/master/status/experimental.svg)]
 [![main](https://github.com/r3stl355/delta-sharing-rust-client/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/r3stl355/delta-sharing-rust-client/actions/workflows/main.yml)
 
 # Delta Sharing client library for Rust
@@ -23,6 +23,6 @@ This is a simple library for Rust to access data published via Delta Sharing. Ha
 
 ## Development
 
-- Run async tests: `cargo test` (or `RUST_LOG=debug cargo test` for troubleshooting)
-- Run blocking tests: `cargo test --features blocking`
-- Style checking: `cargo fmt -- --check`
+- Run all tests: `cargo test --features blocking` (or `RUST_LOG=debug cargo test --features blocking` for extra troubleshooting)
+- Run async client tests only: `cargo test`
+- Style check: `cargo fmt -- --check`

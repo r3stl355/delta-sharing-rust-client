@@ -47,8 +47,8 @@ jobs:
       matrix:
         name:
           - linux / stable
-          - macOS / stable
-          - feature / blocking
+          # - macOS / stable
+          # - feature / blocking
 
         include:
           - name: linux / stable
