@@ -1,12 +1,13 @@
 [package]
 name = "delta-sharing"
 version = "0.1.0"
-description = "Delta Sharing client library"
-keywords = ["delta", "delta-sharing"]
-repository = "https://github.com/r3stl355/delta-sharing-rust-client"
 authors = ["Nikolay Ulmasov <ulmasov@hotmail.com>"]
-readme = "README.md"
 license = "Apache-2.0"
+description = "Delta Sharing client library"
+readme = "README.md"
+keywords = ["delta", "delta-sharing"]
+categories = ["api-bindings", "database"]
+repository = "https://github.com/r3stl355/delta-sharing-rust-client"
 edition = "2021"
 
 [lib]
