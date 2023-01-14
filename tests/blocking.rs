@@ -52,7 +52,7 @@ fn list_shares() {
         shares.len(),
         2,
         "Expected a vector of {}, got {}",
+        2,
         shares.len(),
-        2
     );
 }

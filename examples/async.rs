@@ -16,12 +16,22 @@ async fn main() {
     } else {
         let share_name = &shares[0].name;
         println!(
-            "Found {} shares, expoloring share [{}]",
+            "Found {} shares, exploring share [{}]",
             shares.len(),
             share_name
         );
         let schemas = app.list_schemas(&shares[0]).await.unwrap();
         println!("Found {} schemas in share [{}]", schemas.len(), &share_name);
+
+        if schemas.len() == 0 {
+            let schema_tables = app.list_tables(&schemas[0]).await.unwrap();
+            println!(
+                "Found {} tables in schema [{}]",
+                schema_tables.len(),
+                &schemas[0].name
+            );
+        }
+
         let tables = app.list_all_tables(&shares[0]).await.unwrap();
         if shares.len() == 0 {
             println!(

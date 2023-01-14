@@ -1,4 +1,4 @@
-[![experimental](https://github.com/GIScience/badges/raw/master/status/experimental.svg)]
+![experimental](https://github.com/GIScience/badges/raw/master/status/experimental.svg)
 [![main](https://github.com/r3stl355/delta-sharing-rust-client/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/r3stl355/delta-sharing-rust-client/actions/workflows/main.yml)
 
 # Delta Sharing client library for Rust
@@ -19,7 +19,8 @@ This is a simple library for Rust to access data published via Delta Sharing. Ha
 
 - Clone this repo
 - Set the `bearerToken` and `endpoint` values in the `config.json` to match your Delta Sharing information
-- Run a simple example included with the library: `cargo run --example async`. This example is using an async version of the library. When executed, it will get and display all the data from the first Data Sharing table it finds. For an example using a blocking version of the client, run `cargo run --example blocking --features="delta-sharing/blocking"`
+- Run a simple example included with the library: `cargo run --example async`. This example is using an async version of the library. When executed, it will get and display all the data from the first Data Sharing table it finds. 
+- For an example of using a blocking version of the client to do the same, try `cargo run --example blocking --features=blocking`
 
 ## Development
 

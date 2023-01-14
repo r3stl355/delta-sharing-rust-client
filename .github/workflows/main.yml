@@ -46,12 +46,12 @@ jobs:
     strategy:
       matrix:
         name:
-          - linux / stable
+          - Build and run all tests
           # - macOS / stable
           # - feature / blocking
 
         include:
-          - name: linux / stable
+          - name: Build and run all tests
             features: "--features blocking"
 
           # - name: feature / blocking
@@ -59,13 +59,12 @@ jobs:
 
           # - name: macOS / stable
           #   os: macOS-latest
-          #   test-features: "--features __internal_proxy_sys_no_cache"
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install rust
+      - name: Install Rust
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust || 'stable' }}
