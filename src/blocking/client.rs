@@ -12,14 +12,21 @@ use url::Url;
 
 const METADATA_FILE: &str = "metadata.json";
 
+/// A blocking Client for working with Data Sharing
 pub struct Client {
     http_client: reqwest::blocking::Client,
     base_url: Url,
+    /// Local directory path to store the downloaded cached files
     pub data_root: String,
     cache: HashMap<String, FileCache>,
 }
 
 impl Client {
+    /// Constructs a new blocking Client
+    /// # Arguments
+    ///
+    /// * `provider_config` - Delta Sharing Provider Configuration of type [ProviderConfig]
+    /// * `data_root` - An optional local directory path for caching. Temp location is used if None is given
     pub fn new(
         provider_config: ProviderConfig,
         data_root: Option<String>,
@@ -110,7 +117,6 @@ impl Client {
         let content = resp.bytes().unwrap();
         io::copy(&mut content.as_bytes(), &mut out)
             .expect("Failed to save the content to output file");
-        // Ok(())
     }
 
     pub fn list_shares(&self) -> Result<Vec<Share>, anyhow::Error> {
