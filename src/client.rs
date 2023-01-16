@@ -12,14 +12,21 @@ use url::Url;
 
 const METADATA_FILE: &str = "metadata.json";
 
+/// An asynchronous Client for working with Data Sharing
 pub struct Client {
     http_client: reqwest::Client,
     base_url: Url,
+    /// Local directory path to store the downloaded cached files
     pub data_root: String,
     cache: HashMap<String, FileCache>,
 }
 
 impl Client {
+    /// Constructs a new async Client
+    /// # Arguments
+    ///
+    /// * `provider_config` - Delta Sharing Provider Configuration of type [ProviderConfig]
+    /// * `data_root` - An optional local directory path for caching. Temp location is used if None is given
     pub async fn new(
         provider_config: ProviderConfig,
         data_root: Option<String>,

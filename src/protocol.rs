@@ -1,3 +1,5 @@
+//! Delta Sharing Protocol message types
+
 use serde::{Deserialize, Serialize};
 use serde_json::value::Value;
 use serde_json::Map;
@@ -63,16 +65,6 @@ pub struct TableMetadata {
     pub protocol: Protocol,
     pub metadata: Metadata,
 }
-
-// #[derive(Deserialize, Debug)]
-// pub struct FileAction {
-//     url: String,
-//     id: String,
-//     partition_values: Map<String, Value>,
-//     size: i32,
-//     timestamp: Option<i32>,
-//     version: Option<i32>,
-// }
 
 #[derive(Deserialize, Debug, Clone, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
