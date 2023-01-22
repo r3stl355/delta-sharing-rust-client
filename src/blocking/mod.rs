@@ -1,5 +1,3 @@
-#![cfg_attr(test, deny(warnings))]
-
 //! A blocking Client.
 //!
 //! *This requires the optional `blocking` feature to be enabled.*

@@ -1,5 +1,3 @@
-#![cfg_attr(test, deny(warnings))]
-
 //! # delta-sharing
 //!
 //! This crate provides a [Client][client] to access data published via Delta Sharing.
