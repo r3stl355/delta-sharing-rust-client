@@ -350,3 +350,21 @@ impl Client {
         load_parquet_files_as_dataframe(&table_path)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use test_case::test_case;
+
+    #[test_case(1 ; "when version matches")]
+    #[test_case(crate::utils::CREDENTIALS_VERSION + 1 => panics ; "when version is greater")]
+    #[tokio::test]
+    async fn reject_newer_credentials_version(version: i32) {
+        let config = crate::protocol::ProviderConfig {
+            share_credentials_version: version,
+            endpoint: "https://sharing.delta.io/delta-sharing/".to_string(),
+            bearer_token: "token".to_string(),
+        };
+        let c = super::Client::new(config, None).await;
+        drop(c);
+    }
+}
