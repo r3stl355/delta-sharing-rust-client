@@ -39,6 +39,7 @@ wiremock = "0.5"
 uuid = { version = "1.1", features = ["v4"] }
 tokio-test = { version = "0.4" }
 rand = "0.8.5"
+test-case = "2.2.1"
 
 [[example]]
 name = "async"
