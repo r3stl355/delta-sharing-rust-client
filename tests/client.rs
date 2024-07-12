@@ -112,28 +112,36 @@ async fn get_table_metadata() {
     let app = create_mocked_test_app(body, &url, method("GET")).await;
     let meta = app.client.get_table_metadata(&table).await.unwrap();
 
-    assert_eq!(meta.protocol.min_reader_version, 1, "Protocol mismatch");
-    assert_eq!(
-        meta.metadata.id, "cf9c9342-b773-4c7b-a217-037d02ffe5d8",
-        "Metadata ID mismatch"
-    );
-    assert_eq!(
-        meta.metadata.format.provider, "parquet",
-        "Metadata format provider mismatch"
-    );
-    assert_eq!(
-        meta.metadata.name, None,
-        "Metadata name value should be missing"
-    );
-    assert_eq!(
-        meta.metadata.partition_columns.len(),
-        0,
-        "There should be no partitions"
-    );
-    assert_eq!(
-        meta.metadata.configuration["conf_1_name"], "conf_1_value",
-        "Configuration value expected"
-    );
+    match meta.protocol {
+        Protocol::Delta { .. } => assert!(false, "Wrong protocol deserialization"),
+        Protocol::Legacy { min_reader_version } => assert_eq!(min_reader_version, 1, "Protocol mismatch")
+    };
+    match meta.metadata {
+        Metadata::Delta { .. } => assert!(false, "Wrong metadata deserialization"),
+        Metadata::Legacy ( LegacyMetadata { id, format, name, partition_columns, configuration, .. }) => {
+            assert_eq!(
+                id, "cf9c9342-b773-4c7b-a217-037d02ffe5d8",
+                "Metadata ID mismatch"
+            );
+            assert_eq!(
+                format.provider, "parquet",
+                "Metadata format provider mismatch"
+            );
+            assert_eq!(
+                name, None,
+                "Metadata name value should be missing"
+            );
+            assert_eq!(
+                partition_columns.len(),
+                0,
+                "There should be no partitions"
+            );
+            assert_eq!(
+                configuration["conf_1_name"], "conf_1_value",
+                "Configuration value expected"
+            );
+        }
+    };
 }
 
 #[tokio::test]

@@ -38,8 +38,24 @@ impl Table {
 
 #[derive(Deserialize, Debug, Clone, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Protocol {
+pub struct DeltaProtocol {
     pub min_reader_version: i32,
+    pub min_writer_version: i32,
+    pub reader_features: Vec<String>,
+    pub writer_features: Vec<String>
+}
+
+#[derive(Deserialize, Debug, Clone, PartialEq, Serialize)]
+#[serde(untagged)]
+pub enum Protocol {
+    Legacy { 
+        #[serde(rename = "minReaderVersion")]
+        min_reader_version: i32 
+    },
+    Delta { 
+        #[serde(rename = "deltaProtocol")]
+        delta_protocol: DeltaProtocol 
+    }
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq, Serialize)]
@@ -50,7 +66,7 @@ pub struct Format {
 
 #[derive(Deserialize, Debug, Clone, PartialEq, Serialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Metadata {
+pub struct LegacyMetadata {
     pub id: String,
     pub name: Option<String>,
     pub description: Option<String>,
@@ -58,6 +74,21 @@ pub struct Metadata {
     pub schema_string: String,
     pub configuration: Map<String, Value>,
     pub partition_columns: Vec<String>,
+}
+
+#[derive(Deserialize, Debug, Clone, PartialEq, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DeltaMetadata {
+    pub size: usize,
+    pub num_files: usize,
+    pub delta_metadata: LegacyMetadata
+}
+
+#[derive(Deserialize, Debug, Clone, PartialEq, Serialize)]
+#[serde(untagged)]
+pub enum Metadata {
+    Legacy (LegacyMetadata),
+    Delta (DeltaMetadata)
 }
 
 #[derive(Deserialize, Debug, Clone, PartialEq, Serialize)]
