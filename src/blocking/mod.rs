@@ -26,7 +26,7 @@
 //!      endpoint: "<your Delta Share endpoinit URL>".to_string(),
 //!      bearer_token: "<your Delta Share access token>".to_string(),
 //!  };
-//!  let mut app = Client::new(config, None).unwrap();
+//!  let mut app = Client::new(config, None, None).unwrap();
 //!  let shares = app.list_shares().unwrap();
 //!  if shares.len() == 0 {
 //!      println!("At least 1 Delta Share is required");
@@ -38,7 +38,7 @@
 //!              shares[0].name
 //!          );
 //!      } else {
-//!          let res = app.get_dataframe(&tables[0]).unwrap().collect().unwrap();
+//!          let res = app.get_dataframe(&tables[0], None).unwrap().collect().unwrap();
 //!          println!("Dataframe:\n {}", res);
 //!      }
 //!  }

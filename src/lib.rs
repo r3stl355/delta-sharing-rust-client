@@ -50,7 +50,7 @@
 //!      endpoint: "<your Delta Share endpoinit URL>".to_string(),
 //!      bearer_token: "<your Delta Share access token>".to_string(),
 //!  };
-//!  let mut app = Client::new(config, None).await.unwrap();
+//!  let mut app = Client::new(config, None, None).await.unwrap();
 //!  let shares = app.list_shares().await.unwrap();
 //!  if shares.len() == 0 {
 //!      println!("At least 1 Delta Share is required");
@@ -63,7 +63,7 @@
 //!          );
 //!      } else {
 //!          let res = app
-//!              .get_dataframe(&tables[0])
+//!              .get_dataframe(&tables[0], None)
 //!              .await
 //!              .unwrap()
 //!              .collect()

@@ -21,7 +21,7 @@ fn create_blocking_test_app() -> BlockingTestApp {
         endpoint: server.uri(),
         bearer_token: Uuid::new_v4().to_string(),
     };
-    let client = Client::new(config, None).unwrap();
+    let client = Client::new(config, None, None).unwrap();
     let test_app = BlockingTestApp { client, server };
     test_app
 }
@@ -74,7 +74,7 @@ fn get_dataframe() {
         "shares/{}/schemas/{}/tables/{}/query",
         table.share, table.schema, table.name
     );
-    let mut file: File =
+    let mut file: ParquetFile =
         serde_json::from_str(common::TEST_FILE_RESPONSE).expect("Invalid file info");
     let file_url_path = "/shares/test.parquet";
     file.url = format!("{}{}", &app.server.uri(), &file_url_path);
@@ -117,15 +117,15 @@ fn get_dataframe() {
         .unwrap()
         .to_string();
 
-    let df = c.get_dataframe(&table).unwrap().collect().unwrap();
+    let df = c.get_dataframe(&table, None).unwrap().collect().unwrap();
     assert_eq!(df.shape(), (5, 3), "Dataframe shape mismatch");
 
     // Get the data again, this time it should be served from the local cache (enforced by Expections set on Mocks)
-    let df1 = c.get_dataframe(&table).unwrap().collect().unwrap();
+    let df1 = c.get_dataframe(&table, None).unwrap().collect().unwrap();
     assert_eq!(df1.shape(), (5, 3), "Dataframe shape mismatch");
     assert_eq!(
-        df1.get_row(0).0[1],
-        polars::datatypes::AnyValue::Utf8("One"),
+        df1.get_row(0).unwrap().0[1],
+        polars::datatypes::AnyValue::String("One"),
         "Row value mismatch"
     );
 }

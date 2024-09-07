@@ -9,6 +9,7 @@ use wiremock::matchers::{path, MethodExactMatcher};
 use delta_sharing::protocol::*;
 use delta_sharing::Client;
 
+#[allow(dead_code)]
 pub struct TestApp {
     pub client: Client,
     pub server: MockServer,
@@ -18,6 +19,7 @@ pub const TEST_PROTOCOL_RESPONSE: &str = r#"{ "minReaderVersion": 1 }"#;
 pub const TEST_METADATA_RESPONSE: &str = r#"{ "id": "cf9c9342-b773-4c7b-a217-037d02ffe5d8", "format": { "provider": "parquet" }, "schemaString": "{\"type\":\"struct\",\"fields\":[{\"name\":\"int_field_1\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}},{\"name\":\"double_field_1\",\"type\":\"double\",\"nullable\":true,\"metadata\":{}}]}", "partitionColumns": [], "configuration": {"conf_1_name": "conf_1_value"} }"#;
 pub const TEST_FILE_RESPONSE: &str = r#"{ "url": "<url>", "id": "1", "partitionValues": {}, "size": 2350, "stats": "{\"numRecords\":1}" }"#;
 
+#[allow(dead_code)]
 pub async fn create_test_app() -> TestApp {
     let _ = env_logger::try_init();
 
@@ -28,11 +30,12 @@ pub async fn create_test_app() -> TestApp {
         endpoint: server.uri(),
         bearer_token: Uuid::new_v4().to_string(),
     };
-    let client = Client::new(config, None).await.unwrap();
+    let client = Client::new(config, None, None).await.unwrap();
     let app = TestApp { client, server };
     app
 }
 
+#[allow(dead_code)]
 pub async fn create_mocked_test_app(
     body: &str,
     url: &str,

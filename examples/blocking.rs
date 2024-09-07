@@ -10,7 +10,7 @@ fn main() {
     let conf_str = &fs::read_to_string("./config.json").unwrap();
 
     let config: ProviderConfig = serde_json::from_str(conf_str).expect("Invalid configuration");
-    let mut app = Client::new(config, None).unwrap();
+    let mut app = Client::new(config, None, None).unwrap();
     let shares = app.list_shares().unwrap();
     if shares.len() == 0 {
         println!("At least 1 Delta Share is required");
@@ -22,7 +22,11 @@ fn main() {
                 shares[0].name
             );
         } else {
-            let res = app.get_dataframe(&tables[0]).unwrap().collect().unwrap();
+            let res = app
+                .get_dataframe(&tables[0], None)
+                .unwrap()
+                .collect()
+                .unwrap();
             println!("Dataframe:\n {}", res);
         }
     }

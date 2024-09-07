@@ -36,11 +36,6 @@ pub struct FileResponse {
     pub file: File,
 }
 
-#[derive(Deserialize)]
-pub struct FileActionResponse {
-    pub file: File,
-}
-
 #[derive(Deserialize, PartialEq, Serialize)]
 pub struct FileCache {
     pub table_files: TableFiles,
